@@ -74,7 +74,7 @@
   </properties>
 
   <modules>
-    <module>spring-cloud-sso-samples</module>
+    <module>spring-cloud-sso-sample</module>
   </modules>
 
 	<dependencies>
