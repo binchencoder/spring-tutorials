@@ -1,0 +1,39 @@
+server:
+  port: 8083
+  servlet:
+    context-path: /ui
+  session:
+    cookie:
+      name: UI2SESSION
+
+security:
+  basic:
+    enabled: false
+  oauth2:
+    client:
+      client-id: first-client
+      client-secret: noonewilleverguess
+      access-token-uri: http://localhost:8081/auth/oauth/token
+      user-authorization-uri: http://localhost:8081/auth/oauth/authorize
+    resource:
+      userInfoUri: http://localhost:8081/auth/user/me
+
+spring:
+  thymeleaf:
+    cache: false
+
+  # Debug spring security
+  security:
+    user:
+      name: chenbin
+      password: chenbin
+
+# Logging configurations
+logging:
+  level:
+    root: INFO
+    org:
+      springframework:
+        boot:
+          autoconfigure:
+            security: DEBUG
