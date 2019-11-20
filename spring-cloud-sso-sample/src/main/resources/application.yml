@@ -2,10 +2,13 @@ server:
   port: 8080
   servlet:
     context-path: /
+  session:
+    cookie:
+      name: UI2SESSION
 
 security:
-#  basic:
-#    enabled: false
+  basic:
+    enabled: false
   oauth2:
     client:
       client-id: first-client
@@ -18,3 +21,19 @@ security:
 spring:
   thymeleaf:
     cache: false
+
+  # Debug spring security
+  security:
+    user:
+      name: chenbin
+      password: chenbin
+
+# Logging configurations
+logging:
+  level:
+    root: INFO
+    org:
+      springframework:
+        boot:
+          autoconfigure:
+            security: DEBUG

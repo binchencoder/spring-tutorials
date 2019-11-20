@@ -4,6 +4,7 @@ import com.binchencoder.oauth2.MyAuthenticationProvider;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.annotation.Order;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -58,11 +59,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
   @Override
   protected void configure(HttpSecurity http) throws Exception {
     http.addFilterBefore(new KaptchaAuthenticationFilter("/login", "/login?error"),
-        UsernamePasswordAuthenticationFilter.class)
-        // disabled csrf
-        .csrf().disable()
-        // default protection for all resources (including /oauth/authorize)
-        .authorizeRequests()
+        UsernamePasswordAuthenticationFilter.class);
+    // disabled csrf
+    http.csrf().disable();
+    // default protection for all resources (including /oauth/authorize)
+    http.authorizeRequests()
         .antMatchers("/login", "/oauth/authorize").permitAll()
         .antMatchers("/", "/home", "/about").permitAll()
         .antMatchers("/admin/**").hasAnyRole("ADMIN")
