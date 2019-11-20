@@ -17,7 +17,7 @@ import org.springframework.security.web.access.AccessDeniedHandler;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 @Configuration
-@EnableWebSecurity
+//@EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
   @Autowired
@@ -62,9 +62,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     // disabled csrf
     http.csrf().disable();
     // default protection for all resources (including /oauth/authorize)
-    http.authorizeRequests()
-        .antMatchers("/login", "/oauth/authorize").permitAll()
-        .antMatchers("/", "/home", "/about").permitAll()
+    http.requestMatchers()
+        .antMatchers("/login", "/oauth/authorize")
+        .antMatchers("/", "/home", "/about")
+        .and().authorizeRequests()
         .antMatchers("/admin/**").hasAnyRole("ADMIN")
         .antMatchers("/user/**").hasAnyRole("USER")
         .anyRequest().authenticated()
