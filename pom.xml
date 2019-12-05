@@ -80,6 +80,7 @@
   <modules>
     <module>spring-cloud-sso-sample</module>
     <module>spring-boot-security-thymeleaf</module>
+		<module>spring-retry</module>
     <module>spring-boot-security-sso/spring-boot-security-sso-authserver</module>
     <module>spring-boot-security-sso/spring-boot-security-sso-ui</module>
   </modules>
