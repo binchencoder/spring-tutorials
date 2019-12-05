@@ -1,5 +1,6 @@
 package com.binchencoder.retry;
 
+import java.util.concurrent.atomic.AtomicInteger;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -11,25 +12,33 @@ public class RetryTest {
 
   private static final Logger LOGGER = LoggerFactory.getLogger(RetryTest.class);
 
+  private AtomicInteger count = new AtomicInteger(0);
+
   public void test1() {
     LOGGER.info("Retry service()");
-    for (int i = 1; i <= 3; i++) {
-      if (i != 3) {
-        throw new RemoteAccessException("retry i:" + i);
+    for (; count.get() <= 3; ) {
+      count.incrementAndGet();
+      if (count.get() != 3) {
+        LOGGER.error("throw RemoteAccessException");
+        throw new RemoteAccessException("retry i:" + count.get());
       }
     }
 
     LOGGER.info("Successed");
   }
 
-  @Retryable(include = RemoteAccessException.class)
+  @Retryable(value = RemoteAccessException.class, maxAttempts = 4)
   public void test2() {
     LOGGER.info("Retry service()");
-    for (int i = 1; i <= 3; i++) {
-      if (i != 3) {
-        throw new RemoteAccessException("retry");
+    for (; count.get() <= 2; ) {
+      count.getAndIncrement();
+      if (count.get() != 2) {
+        LOGGER.error("throw RemoteAccessException");
+        throw new RemoteAccessException("retry i:" + count.get());
       }
     }
+
+    LOGGER.info("Successed");
   }
 
   @Test
