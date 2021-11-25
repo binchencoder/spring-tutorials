@@ -1,0 +1,18 @@
+# Logging configurations
+logging:
+  level:
+    root: INFO
+    org:
+      springframework:
+        boot:
+          autoconfigure:
+            security: DEBUG
+
+# Elasticsearch
+spring:
+  elasticsearch:
+    suffix: dev
+    rest:
+      uris: http://es-cn-mp91gafn4000p16le.public.elasticsearch.aliyuncs.com:9200
+      username: elastic
+      password: CwaGeFBZBMt3vmzG
