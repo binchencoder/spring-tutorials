@@ -1,0 +1,18 @@
+# Logging configurations
+logging:
+  level:
+    root: INFO
+    org:
+      springframework:
+        boot:
+          autoconfigure:
+            security: DEBUG
+
+# Elasticsearch
+spring:
+  elasticsearch:
+    suffix: local
+    rest:
+      uris: http://localhost:9200
+      username: elastic
+      password: 123456

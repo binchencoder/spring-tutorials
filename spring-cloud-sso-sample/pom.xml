@@ -5,7 +5,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.binchencoder.oauth2</groupId>
 	<artifactId>spring-cloud-sso-sample</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>${revision}</version>
 	<packaging>war</packaging>
 	<name>spring-cloud-sso-sample</name>
 	<description>OAuth2 login authentication service</description>
@@ -13,7 +13,7 @@
 	<parent>
 		<groupId>com.binchencoder</groupId>
 		<artifactId>spring-tutorials</artifactId>
-		<version>1.0.0-SNAPSHOT</version>
+		<version>${revision}</version>
 		<relativePath>..</relativePath>
 	</parent>
 
