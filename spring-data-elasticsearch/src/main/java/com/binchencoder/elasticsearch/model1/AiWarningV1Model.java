@@ -23,7 +23,7 @@ public class AiWarningV1Model implements Serializable {
   private String id;
 
 //  @Field(type = FieldType.Nested, includeInParent = true)
-@Field(type = FieldType.Nested)
+  @Field(type = FieldType.Nested)
   private List<WarningV1> warnings;
 
 }

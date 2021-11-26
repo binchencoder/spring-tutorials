@@ -3,6 +3,8 @@ package com.binchencoder.elasticsearch.model1;
 import java.io.Serializable;
 import lombok.Builder;
 import lombok.Data;
+import org.springframework.data.elasticsearch.annotations.Field;
+import org.springframework.data.elasticsearch.annotations.FieldType;
 
 /**
  * @author: chenbin
@@ -14,6 +16,7 @@ public class WarningV1 implements Serializable {
 
   private String name;
 
-  private Number score;
+//  @Field(type = FieldType.Float_Range)
+  private Integer score;
 
 }

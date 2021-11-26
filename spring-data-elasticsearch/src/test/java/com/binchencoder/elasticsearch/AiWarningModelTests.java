@@ -3,20 +3,18 @@ package com.binchencoder.elasticsearch;
 import com.binchencoder.elasticsearch.model.AiWarningModel;
 import com.binchencoder.elasticsearch.model.ChildWarning;
 import com.binchencoder.elasticsearch.model.Warning;
-import com.binchencoder.elasticsearch.model1.AiWarningV1Model;
-import com.binchencoder.elasticsearch.model1.WarningV1;
 import com.google.common.collect.Lists;
 import java.util.List;
 import java.util.Random;
 import java.util.UUID;
 import javax.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
-import org.elasticsearch.index.query.BoolQueryBuilder;
-import org.elasticsearch.index.query.ScriptQueryBuilder;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.elasticsearch.core.ElasticsearchOperations;
+import org.springframework.data.elasticsearch.core.document.Document;
 import org.springframework.test.context.junit4.SpringRunner;
 
 /**
@@ -28,7 +26,11 @@ import org.springframework.test.context.junit4.SpringRunner;
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = {Application.class})
 @Slf4j
-public class Tests {
+public class AiWarningModelTests {
+
+  static {
+    System.setProperty("es.set.netty.runtime.available.processors", "false");
+  }
 
   @Resource
   protected ElasticsearchOperations elasticsearchOperations;
@@ -41,6 +43,16 @@ public class Tests {
   List<String> warnChildNames = Lists.newArrayList("toe", "beer_bottle", "not_uniform", "new_wall",
       "door", "door_beam", "smoke");
   Random warnChildNamesRandom = new Random(warnChildNames.size());
+
+  Random scoreRandom = new Random(100);
+
+  @Before
+  public void beforeTest() {
+    if (!elasticsearchOperations.indexOps(AiWarningModel.class).exists()) {
+      elasticsearchOperations.indexOps(AiWarningModel.class)
+          .create(Document.create().append("number_of_shards", 3).append("number_of_replicas", 2));
+    }
+  }
 
   @Test
   public void testInsert() {
@@ -77,42 +89,5 @@ public class Tests {
 
 //    System.out.println(JSON.toJSON(warningModels));
     elasticsearchOperations.save(warningModels);
-  }
-
-  @Test
-  public void testInsertV1() {
-    List<AiWarningV1Model> warningModels = Lists.newArrayList();
-    for (int i = 1; i < 20; i++) {
-      AiWarningV1Model aiWarningModel = AiWarningV1Model.builder()
-          .id(UUID.randomUUID().toString()).build();
-      if (i % 2 == 0) {
-        elasticsearchOperations.save(aiWarningModel);
-        continue;
-      }
-
-      List<WarningV1> warnings = Lists.newArrayList();
-      for (int m = 1; m < 5; m++) {
-        String warnName = warnNames.get(warnNamesRandom.nextInt(warnNames.size()));
-        String warnLabel = warnChildNames.get(warnChildNamesRandom.nextInt(warnChildNames.size()));
-        WarningV1 warning = WarningV1.builder()
-            .name(warnName + "." + warnLabel)
-            .score(Math.random())
-            .build();
-
-        warnings.add(warning);
-      }
-
-      aiWarningModel.setWarnings(warnings);
-      warningModels.add(aiWarningModel);
-    }
-
-//    System.out.println(JSON.toJSON(warningModels));
-    elasticsearchOperations.save(warningModels);
-  }
-
-
-  @Test
-  public void testQueryV1() {
-
   }
 }
