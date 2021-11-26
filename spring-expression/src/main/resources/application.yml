@@ -1,0 +1,9 @@
+# Logging configurations
+logging:
+  level:
+    root: INFO
+    org:
+      springframework:
+        boot:
+          autoconfigure:
+            security: DEBUG
