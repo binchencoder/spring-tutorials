@@ -89,10 +89,8 @@
 		<module>spring-boot-security-sso/spring-boot-security-sso-ui</module>
 		<module>spring-cloud-sso-sample</module>
 		<module>spring-data-elasticsearch</module>
-		<module>spring-retry</module>
 		<module>spring-expression</module>
-    <module>spring-boot-security-sso/spring-boot-security-sso-authserver</module>
-    <module>spring-boot-security-sso/spring-boot-security-sso-ui</module>
+		<module>spring-retry</module>
   </modules>
 
 	<dependencyManagement>
