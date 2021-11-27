@@ -16,7 +16,7 @@ PUT /ai_warning
 }
 ```
 
-## ai_warning_v2
+## ai_warning_v1
 
 删除索引
 ```http
@@ -62,6 +62,51 @@ PUT /ai_warning_v1
             }
         }
     }
+}
+```
+
+## ai_warning_v2
+
+```http
+PUT /ai_warning_v2
+{
+    "settings":{
+        "number_of_shards":3,
+        "number_of_replicas":2
+    }
+}
+```
+
+
+```http
+GET /ai_warning_v2/_search
+{
+  "query": {
+    "bool": {
+      "should": [
+        {
+          "bool": {
+            "must": [
+              {
+                "range": {
+                  "wear_slippers_or_bare_feet_warning.new_wall": {
+                    "gt": 0.1
+                  }
+                }
+              },
+              {
+                "range": {
+                  "wear_slippers_or_bare_feet_warning.beer_bottle": {
+                    "gt": 0.1
+                  }
+                }
+              }
+            ]
+          }
+        }
+      ]
+    }
+  }
 }
 ```
 
