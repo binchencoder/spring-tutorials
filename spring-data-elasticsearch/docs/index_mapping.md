@@ -81,6 +81,7 @@ PUT /ai_warning_v2
 ```http
 GET /ai_warning_v2/_search
 {
+  "profile": true, 
   "query": {
     "bool": {
       "should": [
@@ -89,15 +90,35 @@ GET /ai_warning_v2/_search
             "must": [
               {
                 "range": {
-                  "wear_slippers_or_bare_feet_warning.new_wall": {
-                    "gt": 0.1
+                  "warnings.wear_slippers_or_bare_feet_warning.door_beam": {
+                    "gt": 0.4692
                   }
                 }
               },
               {
                 "range": {
-                  "wear_slippers_or_bare_feet_warning.beer_bottle": {
-                    "gt": 0.1
+                  "warnings.wear_slippers_or_bare_feet_warning.not_uniform": {
+                    "gt": 0.6
+                  }
+                }
+              }
+            ]
+          }
+        },
+        {
+          "bool": {
+            "must": [
+              {
+                "range": {
+                  "warnings.beer_bottle_warning.toe": {
+                    "gt": 0.4692
+                  }
+                }
+              },
+              {
+                "range": {
+                  "warnings.beer_bottle_warning.new_wall": {
+                    "gt": 0.6
                   }
                 }
               }

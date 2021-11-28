@@ -90,24 +90,16 @@ public class AiWarningV2ModelTests {
   public void testQueryV1() {
     NativeSearchQueryBuilder queryBuilder = new NativeSearchQueryBuilder();
     BoolQueryBuilder mustBuilder1 = QueryBuilders.boolQuery()
-        .must(QueryBuilders.boolQuery()
-            .must(QueryBuilders.matchQuery("warnings.name",
-                "wear_slippers_or_bare_feet_warning.new_wall"))
-            .must(QueryBuilders.rangeQuery("warnings.score").gt(20)))
-        .must(QueryBuilders.boolQuery()
-            .must(QueryBuilders.matchQuery("warnings.name",
-                "wear_slippers_or_bare_feet_warning.beer_bottle"))
-            .must(QueryBuilders.rangeQuery("warnings.score").gt(23)));
+        .must(QueryBuilders.rangeQuery("warnings.wear_slippers_or_bare_feet_warning.door_beam")
+            .gt(0.46))
+        .must(QueryBuilders.rangeQuery("warnings.wear_slippers_or_bare_feet_warning.not_unitform")
+            .gt(0.6));
 
     BoolQueryBuilder mustBuilder2 = QueryBuilders.boolQuery()
-        .must(QueryBuilders.boolQuery()
-            .must(QueryBuilders.matchQuery("warnings.name",
-                "beer_bottle_warning.new_wall"))
-            .must(QueryBuilders.rangeQuery("warnings.score").gt(50)))
-        .must(QueryBuilders.boolQuery()
-            .must(QueryBuilders.matchQuery("warnings.name",
-                "beer_bottle_warning.toe"))
-            .must(QueryBuilders.rangeQuery("warnings.score").gt(66)));
+        .must(QueryBuilders.rangeQuery("warnings.beer_bottle_warning.new_wall")
+            .gt(0.5))
+        .must(QueryBuilders.rangeQuery("warnings.beer_bottle_warning.toe")
+            .gt(0.6));
 
     BoolQueryBuilder boolQueryBuilder = QueryBuilders.boolQuery()
         .should(mustBuilder1)
