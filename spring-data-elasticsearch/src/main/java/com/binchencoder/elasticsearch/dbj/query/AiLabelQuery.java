@@ -1,4 +1,4 @@
-package com.binchencoder.elasticsearch.dbj.dbj.query;
+package com.binchencoder.elasticsearch.dbj.query;
 
 import java.util.List;
 import lombok.Builder;

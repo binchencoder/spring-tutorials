@@ -2,7 +2,7 @@ package com.binchencoder.elasticsearch.dbj;
 
 import com.binchencoder.elasticsearch.Application;
 import com.binchencoder.elasticsearch.dbj.model.AiLabelModel;
-import com.binchencoder.elasticsearch.dbj.dbj.query.AiLabelQuery;
+import com.binchencoder.elasticsearch.dbj.query.AiLabelQuery;
 import java.util.Objects;
 import java.util.stream.Collectors;
 import javax.annotation.Resource;

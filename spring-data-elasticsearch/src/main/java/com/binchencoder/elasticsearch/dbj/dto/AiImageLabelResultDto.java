@@ -1,4 +1,4 @@
-package com.binchencoder.elasticsearch.dbj.dbj.dto;
+package com.binchencoder.elasticsearch.dbj.dto;
 
 import java.io.Serializable;
 import lombok.Data;

@@ -56,7 +56,7 @@ PUT /ai_warning_v1
                         }
                     },
                     "score":{
-                        "type":"float"
+                        "type":"scaled_float"
                     }
                 }
             }
@@ -67,6 +67,7 @@ PUT /ai_warning_v1
 
 ## ai_warning_v2
 
+创建索引
 ```http
 PUT /ai_warning_v2
 {
@@ -74,60 +75,6 @@ PUT /ai_warning_v2
         "number_of_shards":3,
         "number_of_replicas":2
     }
-}
-```
-
-
-```http
-GET /ai_warning_v2/_search
-{
-  "profile": true, 
-  "query": {
-    "bool": {
-      "should": [
-        {
-          "bool": {
-            "must": [
-              {
-                "range": {
-                  "warnings.wear_slippers_or_bare_feet_warning.door_beam": {
-                    "gt": 0.4692
-                  }
-                }
-              },
-              {
-                "range": {
-                  "warnings.wear_slippers_or_bare_feet_warning.not_uniform": {
-                    "gt": 0.6
-                  }
-                }
-              }
-            ]
-          }
-        },
-        {
-          "bool": {
-            "must": [
-              {
-                "range": {
-                  "warnings.beer_bottle_warning.toe": {
-                    "gt": 0.4692
-                  }
-                }
-              },
-              {
-                "range": {
-                  "warnings.beer_bottle_warning.new_wall": {
-                    "gt": 0.6
-                  }
-                }
-              }
-            ]
-          }
-        }
-      ]
-    }
-  }
 }
 ```
 

@@ -1,6 +1,6 @@
 package com.binchencoder.elasticsearch.dbj.model;
 
-import com.binchencoder.elasticsearch.dbj.dbj.dto.AiImageLabelResultDto;
+import com.binchencoder.elasticsearch.dbj.dto.AiImageLabelResultDto;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
