@@ -44,7 +44,7 @@ public class AiWarningV2ModelTests {
 
   List<String> warnNames = Lists.newArrayList("wear_slippers_or_bare_feet_warning",
       "beer_bottle_warning", "not_uniform_warning", "no_door_beam_waring",
-      "no_oblique_brick_waring", "smoking_warning");
+      "no_oblique_brick_waring", "smoking_warning", "test");
   Random warnNamesRandom = new Random(warnNames.size());
 
   List<String> warnChildNames = Lists.newArrayList("toe", "beer_bottle", "not_uniform", "new_wall",

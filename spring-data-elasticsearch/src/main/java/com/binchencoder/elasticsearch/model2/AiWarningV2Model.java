@@ -24,7 +24,7 @@ public class AiWarningV2Model implements Serializable {
   private String id;
 
 //  @Field(type = FieldType.Nested, includeInParent = true)
-  @Field(type = FieldType.Nested)
+  @Field(type = FieldType.Object)
   private Map<String, Double> warnings;
 
 }
