@@ -1,0 +1,61 @@
+GET /ai_warning/_search
+{
+  "query": {
+    "bool": {
+      "must": [
+        {
+          "match": {
+            "warnings.name": "beer_bottle_warning"
+          }
+        },
+        {
+          "nested": {
+            "path": "warnings.children",
+            "query": {
+              "bool": {
+                "must": [
+                  {
+                    "bool": {
+                      "must": [
+                        {
+                          "match": {
+                            "warnings.children.label": "toe"
+                          }
+                        },
+                        {
+                         "range": {
+                            "warnings.children.score": {
+                              "gt": 0.6
+                            }
+                          }
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "bool": {
+                      "must": [
+                        {
+                          "match": {
+                            "warnings.children.label": "smoke"
+                          }
+                        },
+                        {
+                         "range": {
+                            "warnings.children.score": {
+                              "gt": 0.1
+                            }
+                          }
+                        }
+                      ]
+                    }
+                  }
+                ]
+              }
+            }
+          }
+        }
+      ]
+    }
+  }
+}
