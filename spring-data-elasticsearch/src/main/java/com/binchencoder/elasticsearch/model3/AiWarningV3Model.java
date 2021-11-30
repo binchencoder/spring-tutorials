@@ -1,4 +1,4 @@
-package com.binchencoder.elasticsearch.model;
+package com.binchencoder.elasticsearch.model3;
 
 import java.io.Serializable;
 import java.util.List;
@@ -15,14 +15,14 @@ import org.springframework.data.elasticsearch.annotations.FieldType;
  */
 @Data
 @Builder
-@Document(indexName = "ai_warning")
-public class AiWarningModel implements Serializable {
+@Document(indexName = "ai_warning_v3")
+public class AiWarningV3Model implements Serializable {
 
   @Id
   @Field(type = FieldType.Text)
   private String id;
 
   @Field(type = FieldType.Nested, includeInParent = true)
-  private List<Warning> warnings;
+  private List<WarningV3> warnings;
 
 }

@@ -1,0 +1,61 @@
+POST /ai_warning/_doc
+{
+  "id" : "ba1f0512-8573-41b2-91f5-66eb2e214eb11114",
+  "warnings" : [
+    {
+      "name" : "not_uniform_warning",
+      "children" : [
+        {
+          "label" : "door_beam",
+          "score" : 0.5836293
+        },
+        {
+          "label" : "not_uniform",
+          "score" : 0.6093792
+        },
+        {
+          "label" : "beer_bottle",
+          "score" : 0.76804394
+        }
+      ]
+    },
+    {
+      "name" : "beer_bottle_warning",
+      "children" : [
+        {
+          "label" : "toe",
+          "score" : 0.91253966
+        },
+        {
+          "label" : "not_uniform",
+          "score" : 0.10240126
+        },
+        {
+          "label" : "smoke",
+          "score" : 0.862835
+        }
+      ]
+    },
+    {
+      "name" : "beer_bottle_warning",
+      "children" : [
+        {
+          "label" : "toe",
+          "score" : 0.68993247
+        },
+        {
+          "label" : "beer_bottle",
+          "score" : 0.33933377
+        },
+        {
+          "label" : "door",
+          "score" : 0.035404254
+        },
+        {
+          "label" : "smoke",
+          "score" : 0.14218274
+        }
+      ]
+    }
+  ]
+}

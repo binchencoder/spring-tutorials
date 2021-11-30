@@ -4,6 +4,8 @@ import java.io.Serializable;
 import java.util.List;
 import lombok.Builder;
 import lombok.Data;
+import org.springframework.data.elasticsearch.annotations.Field;
+import org.springframework.data.elasticsearch.annotations.FieldType;
 
 /**
  * @author: chenbin
@@ -15,6 +17,7 @@ public class Warning implements Serializable {
 
   private String name;
 
+  @Field(type = FieldType.Nested, includeInParent = true)
   private List<ChildWarning> children;
 
 }

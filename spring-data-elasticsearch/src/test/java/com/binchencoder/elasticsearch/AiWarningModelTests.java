@@ -1,8 +1,10 @@
 package com.binchencoder.elasticsearch;
 
+import com.alibaba.fastjson.JSON;
 import com.binchencoder.elasticsearch.model.AiWarningModel;
 import com.binchencoder.elasticsearch.model.ChildWarning;
 import com.binchencoder.elasticsearch.model.Warning;
+import com.binchencoder.elasticsearch.model1.AiWarningV1Model;
 import com.google.common.collect.Lists;
 import java.util.List;
 import java.util.Random;
@@ -44,13 +46,24 @@ public class AiWarningModelTests {
       "door", "door_beam", "smoke");
   Random warnChildNamesRandom = new Random(warnChildNames.size());
 
-  Random scoreRandom = new Random(100);
-
   @Before
   public void beforeTest() {
+    this.createIndexTest();
+  }
+
+  @Test
+  public void createIndexTest() {
     if (!elasticsearchOperations.indexOps(AiWarningModel.class).exists()) {
       elasticsearchOperations.indexOps(AiWarningModel.class)
           .create(Document.create().append("number_of_shards", 3).append("number_of_replicas", 2));
+    }
+  }
+
+  @Test
+  public void deleteIndexTest() {
+    if (elasticsearchOperations.indexOps(AiWarningModel.class).exists()) {
+      elasticsearchOperations.indexOps(AiWarningModel.class).delete();
+      this.createIndexTest();
     }
   }
 
@@ -60,21 +73,23 @@ public class AiWarningModelTests {
     for (int i = 1; i < 20; i++) {
       AiWarningModel aiWarningModel = AiWarningModel.builder()
           .id(UUID.randomUUID().toString()).build();
-      if (i % 2 == 0) {
-        elasticsearchOperations.save(aiWarningModel);
-        continue;
-      }
+
+      // 写入空数据
+//      if (i % 2 == 0) {
+//        this.saveWarningModels(Lists.newArrayList(aiWarningModel));
+//        continue;
+//      }
 
       List<Warning> warnings = Lists.newArrayList();
-      for (int m = 1; m < 3; m++) {
+      for (int m = 1; m < 4; m++) {
         Warning warning = Warning.builder()
             .name(warnNames.get(warnNamesRandom.nextInt(warnNames.size()))).build();
 
         List<ChildWarning> childWarnings = Lists.newArrayList();
-        for (int j = 1; j < 3; j++) {
+        for (int j = 1; j < 5; j++) {
           ChildWarning childWarning = ChildWarning.builder()
               .label(warnChildNames.get(warnChildNamesRandom.nextInt(warnChildNames.size())))
-              .score(Math.random())
+              .score(Double.valueOf(Math.random()).floatValue())
               .build();
           childWarnings.add(childWarning);
         }
@@ -87,7 +102,15 @@ public class AiWarningModelTests {
       warningModels.add(aiWarningModel);
     }
 
-//    System.out.println(JSON.toJSON(warningModels));
+    this.saveWarningModels(warningModels);
+  }
+
+  public void saveWarningModels(List<AiWarningModel> warningModels) {
+    if (null == warningModels) {
+      return;
+    }
+
+    System.out.println(JSON.toJSON(warningModels));
     elasticsearchOperations.save(warningModels);
   }
 }

@@ -14,6 +14,6 @@ public class ChildWarning implements Serializable {
 
   private String label;
 
-  private Number score;
+  private Float score;
 
 }
