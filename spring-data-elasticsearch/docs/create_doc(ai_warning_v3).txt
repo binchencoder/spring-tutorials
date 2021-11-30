@@ -1,0 +1,39 @@
+POST /ai_warning_v3/_doc
+{
+  "id" : "36a9f980-6763-4819-8e18-12457787878",
+  "warnings" : [
+    {
+      "name" : "smoking_warning",
+      "children" : {
+        "smoke" : 0.32275558,
+        "toe" : 0.6512185
+      }
+    },
+    {
+      "name" : "smoking_warning",
+      "children" : {
+        "smoke" : 0.68056005,
+        "toe" : 0.9423278
+      }
+    },
+    {
+      "name" : "test",
+      "children" : {
+        "door" : 0.15856074,
+        "smoke" : 0.12086704,
+        "toe" : 0.92157716,
+        "beer_bottle" : 0.5918472
+      }
+    }
+  ]
+}
+
+
+GET /ai_warning_v3/_search
+{
+  "query": {
+    "match": {
+      "id.keyword": "36a9f980-6763-4819-8e18-12457787878"
+    }
+  }
+}

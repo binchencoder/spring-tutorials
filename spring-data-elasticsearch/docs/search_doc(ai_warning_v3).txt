@@ -1,3 +1,75 @@
+POST /ai_warning_v3/_doc
+{
+  "id" : "36a9f980-6763-4819-8e18-12457787878",
+  "warnings" : [
+    {
+      "name" : "smoking_warning",
+      "children" : {
+        "smoke" : 0.32275558,
+        "toe" : 0.6512185
+      }
+    },
+    {
+      "name" : "smoking_warning",
+      "children" : {
+        "smoke" : 0.68056005,
+        "toe" : 0.9423278
+      }
+    },
+    {
+      "name" : "test",
+      "children" : {
+        "door" : 0.15856074,
+        "smoke" : 0.12086704,
+        "toe" : 0.92157716,
+        "beer_bottle" : 0.5918472
+      }
+    }
+  ]
+}
+
+插入一条上面的数据, 用下面的语句查询, 查不出id为"36a9f980-6763-4819-8e18-12457787878"的数据才对
+
+GET /ai_warning_v3/_search
+{
+  "query": {
+    "nested": {
+      "path": "warnings",
+      "query": {
+        "bool": {
+          "should": [
+            {
+              "bool": {
+               "must": [
+                 {
+                   "match": {
+                      "warnings.name": "smoking_warning"
+                    }
+                 },
+                 {
+                   "range": {
+                      "warnings.children.smoke": {
+                        "gt": 0.6
+                      }
+                    }
+                 },
+                 {
+                   "range": {
+                      "warnings.children.toe": {
+                        "lt": 0.8
+                      }
+                    }
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      }
+    }
+  }
+}
+
 GET /ai_warning_v3/_search
 {
   "query": {
