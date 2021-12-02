@@ -1,0 +1,51 @@
+PUT /ai_warning
+{
+  "settings": {
+    "number_of_shards": 3,
+	  "number_of_replicas": 2
+  },
+  "mappings": {
+    "properties" : {
+      "id" : {
+          "type" : "text",
+           "fields" : {
+                "keyword" : {
+                "type" : "keyword",
+                "ignore_above" : 256
+            }
+         }
+      },
+      "warnings" : {
+        "type": "nested",
+        "properties" : {
+          "children" : {
+            "type": "nested",
+            "properties" : {
+              "label" : {
+                "type" : "text",
+                "fields" : {
+                  "keyword" : {
+                    "type" : "keyword",
+                    "ignore_above" : 256
+                  }
+                }
+              },
+              "score" : {
+                "type" : "float"
+              }
+            }
+          },
+          "name" : {
+            "type" : "text",
+            "fields" : {
+              "keyword" : {
+                "type" : "keyword",
+                "ignore_above" : 256
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
