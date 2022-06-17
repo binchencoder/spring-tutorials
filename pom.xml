@@ -44,7 +44,7 @@
 		<!-- Third party -->
 		<lombok.version>1.18.2</lombok.version>
 		<google-guava.version>31.0.1-jre</google-guava.version>
-		<fastjson.version>1.2.70</fastjson.version>
+		<fastjson.version>1.2.83</fastjson.version>
 
     <!-- plugins -->
     <!-- can't upgrade the plugin yet; as there is an issue with 2.22 no longer running all the tests-->
